@@ -1,0 +1,23 @@
+Problem Number : 136
+problem Statement : Single Number
+Approaches :-
+1. Using Nested loop, Time Complexity : O(nxn)
+2. Using Sorting, Time Complexity O(log N)
+3. Using XOR (bitwise operator), O(N)
+
+# Code of the Solution (C++) :
+
+class Solution {
+public:
+       int singleNumber(vector<int> & nums) {
+         
+
+        int result = 0;
+        for(int i = 0; i < nums.size(); i++)
+        {
+            result ^= nums[i];      
+              
+        }
+        return result;
+       }
+};
