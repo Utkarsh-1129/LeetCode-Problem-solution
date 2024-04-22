@@ -1,0 +1,21 @@
+Problem Number: 1.
+Problem Statement: Two Sum
+Programming Language Used: C++
+Approaches:
+  1. Using vector concept along with nested loop.
+  2. Check Sum: For each pair of indices (i, j) where j < i, it checks if nums[i] + nums[j] equals the target value.
+  3. Time Complexity: ( O(n^2)) 
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        for(int i=0; i<nums.size(); i++){
+            for(int j=0; j<i; j++){
+            if(nums[i]+nums[j]==target){
+                return {i,j};
+            }
+            }
+        }
+        return {};
+    }
+};
