@@ -1,0 +1,47 @@
+**LEETCODE PROBLEM SOLUTION:** 1608. Special Array With X Elements Greater Than or Equal X.
+
+### Approach Explanation:
+
+The problem is to find a special integer `x` such that there are exactly `x` numbers in the array that are greater than or equal to `x`. Here's how we can solve it:
+
+1. **Sort the Array:** First, we sort the array. Sorting helps in efficiently counting how many elements are greater than or equal to a given value using a linear scan.
+
+2. **Iterate through Possible Values of `x`:** We loop through each possible value of `x` from `0` to `n` (where `n` is the size of the array). For each `x`, we count how many elements in the array are greater than or equal to `x`.
+
+3. **Count Elements >= `x`:** Using the sorted property of the array, we maintain a counter `cur` which helps us quickly find the number of elements greater than or equal to `x`. We increment `cur` until `nums[cur]` is no longer less than `x`.
+
+4. **Check Condition:** If at any point, the number of elements greater than or equal to `x` (i.e., `n - cur`) equals `x`, we return `x`.
+
+5. **Return -1 if No Special `x` Found:** If no such `x` exists, we return `-1`.
+
+### Complexity Analysis
+
+- **Time Complexity:** The time complexity is dominated by the sorting step, which is \(O(n \log n)\). The subsequent loop and count adjustments run in \(O(n)\) time, making the overall complexity \(O(n \log n)\).
+- **Space Complexity:** The space complexity is \(O(1)\) additional space beyond the input array, as we are using a constant amount of extra space.
+
+### Full Code with Comments:
+
+class Solution {
+public:
+    int specialArray(std::vector<int>& nums) {
+        int n = nums.size();
+        
+        // Sort the array to facilitate counting elements >= x efficiently
+        std::sort(nums.begin(), nums.end());
+        
+        int cur = 0;
+        // Iterate through all possible values of x from 0 to n
+        for (int x = 0; x <= n; ++x) {
+            // Increment cur to skip over elements < x
+            while (cur < n && nums[cur] < x) {
+                ++cur;
+            }
+            
+            // If the number of elements >= x is exactly x, return x
+            if (n - cur == x) return x;
+        }
+        
+        // If no special x is found, return -1
+        return -1;
+    }
+};
